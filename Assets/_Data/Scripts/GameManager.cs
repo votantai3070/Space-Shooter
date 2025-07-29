@@ -1,0 +1,41 @@
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    public GameObject bulletPrefab;
+    [SerializeField] int initialBulletCount = 5;
+
+    [SerializeField] private List<GameObject> bulletPool = new List<GameObject>();
+
+    private void Start()
+    {
+        for (int i = 0; i <= initialBulletCount; i++)
+        {
+            GameObject gameObject = Instantiate(bulletPrefab);
+            gameObject.SetActive(false);
+            bulletPool.Add(gameObject);
+        }
+    }
+
+    public GameObject GetBulletFromPool()
+    {
+        foreach (GameObject bullet in bulletPool)
+        {
+            if (!bullet.activeInHierarchy)
+            {
+                return bullet;
+            }
+        }
+
+        GameObject newBullet = Instantiate(bulletPrefab);
+        newBullet.SetActive(false);
+        bulletPool.Add(newBullet);
+        return newBullet;
+    }
+
+    public void ReturnBulletToPool(GameObject bullet)
+    {
+        bullet.SetActive(false);
+    }
+}
