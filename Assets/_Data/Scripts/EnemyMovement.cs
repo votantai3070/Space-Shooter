@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -7,6 +7,14 @@ public class EnemyMovement : MonoBehaviour
     public float speed = 2f;
     private SpawnEnemy spawner;
 
+    private Vector3 startPoint;
+    private Vector3 endPoint;
+    private float journeyLength;
+    private float journeyTime;
+    private float startTime;
+
+    private bool isMovingParabola = false;
+
     public void SetPath(Transform path)
     {
         waypoints = new Transform[path.childCount];
@@ -14,6 +22,8 @@ public class EnemyMovement : MonoBehaviour
         {
             waypoints[i] = path.GetChild(i);
         }
+
+        SetupNextParabola();
     }
 
     public void SetSpawner(SpawnEnemy spawnerRef)
@@ -25,17 +35,48 @@ public class EnemyMovement : MonoBehaviour
     {
         if (waypoints == null || currentWaypointIndex >= waypoints.Length)
         {
-            spawner.EnemyDied();
+            spawner?.EnemyDied();
             Destroy(gameObject);
             return;
         }
 
-        Transform target = waypoints[currentWaypointIndex];
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        MoveParabola();
+    }
 
-        if (Vector3.Distance(transform.position, target.position) < 0.1f)
+    void SetupNextParabola()
+    {
+        if (currentWaypointIndex >= waypoints.Length) return;
+
+        startPoint = transform.position;
+        endPoint = waypoints[currentWaypointIndex].position;
+        journeyLength = Vector3.Distance(startPoint, endPoint);
+        journeyTime = journeyLength / speed;
+        startTime = Time.time;
+        isMovingParabola = true;
+    }
+
+    void MoveParabola()
+    {
+        if (!isMovingParabola) return;
+
+        float t = (Time.time - startTime) / journeyTime;
+
+
+        if (t >= 1f)
         {
+            transform.position = endPoint;
             currentWaypointIndex++;
+            SetupNextParabola();
+            return;
         }
+
+        // Tính vị trí theo parabol (trục cong là Y)
+        Vector3 flatPos = Vector3.Lerp(startPoint, endPoint, t);
+        float height = 2f; // chiều cao cực đại của parabol
+        float parabola = 4 * height * (t - t * t); // công thức y = 4h(t - t^2)
+
+        flatPos.y += parabola;
+
+        transform.position = flatPos;
     }
 }
