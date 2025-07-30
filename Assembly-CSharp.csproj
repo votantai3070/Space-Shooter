@@ -62,7 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Data\Scripts\Shooter.cs" />
+    <Compile Include="Assets\_Data\Scripts\SpawnEnemy.cs" />
+    <Compile Include="Assets\_Data\Scripts\EnemyManage.cs" />
+    <Compile Include="Assets\_Data\Scripts\EnemyMovement.cs" />
     <Compile Include="Assets\Space Shooter Template FREE\Scripts\RepeatingBackground.cs" />
+    <Compile Include="Assets\_Data\Scripts\EnemyShoot.cs" />
     <Compile Include="Assets\Space Shooter Template FREE\Scripts\PlayerMoving.cs" />
     <Compile Include="Assets\_Data\Scripts\GameManager.cs" />
     <Compile Include="Assets\_Data\Scripts\Parallax.cs" />

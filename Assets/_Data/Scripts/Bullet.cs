@@ -4,6 +4,8 @@ public class Bullet : MonoBehaviour
 {
     public float lifeTime = 2f;
     private GameManager bulletPool;
+    private EnemyManage enemyPool;
+
 
     private void OnEnable()
     {
@@ -15,9 +17,21 @@ public class Bullet : MonoBehaviour
         CancelInvoke("Deactivate");
     }
 
-    public void SetPool(GameManager pool)
+    public void SetPool(GameManager pool, EnemyManage poolEnemy)
     {
-        bulletPool = pool;
+        if (pool != null)
+        {
+            bulletPool = pool;
+        }
+        else if (poolEnemy != null)
+        {
+            enemyPool = poolEnemy;
+        }
+        else
+        {
+            Debug.LogError("Bullet pool is not set!");
+        }
+
     }
 
     private void Deactivate()

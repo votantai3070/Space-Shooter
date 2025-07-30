@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class EnemyManage : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static EnemyManage Instance;
     public GameObject bulletPrefab;
     [SerializeField] int initialBulletCount = 5;
 

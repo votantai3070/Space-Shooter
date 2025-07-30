@@ -1,8 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Shooter : MonoBehaviour
+public class EnemyShoot : MonoBehaviour
 {
-    public Transform centralGun;
+
+    public Transform firePoint;
     public float bulletSpeed = 10f;
     public float fireRate = 0.5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -13,15 +14,16 @@ public class Shooter : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bullet = GameManager.Instance.GetBulletFromPool();
-        bullet.transform.position = centralGun.position;
-        bullet.transform.rotation = centralGun.rotation;
+        GameObject bullet = EnemyManage.Instance.GetBulletFromPool();
+        bullet.transform.position = firePoint.position;
+        bullet.transform.rotation = firePoint.rotation;
         bullet.SetActive(true);
 
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bulletScript.SetPool(GameManager.Instance, null);
+        EnemyManage instance = EnemyManage.Instance;
+        bulletScript.SetPool(null, instance);
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.linearVelocity = centralGun.up * bulletSpeed;
+        rb.linearVelocity = -firePoint.up * bulletSpeed;
     }
 }
