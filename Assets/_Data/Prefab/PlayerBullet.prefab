@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4797946162506259488}
   - component: {fileID: 4621473546395695369}
   m_Layer: 0
-  m_Name: Machine Gun
+  m_Name: PlayerBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a54129c7cf2aa44e872179597f76fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 2
+  lifeTime: 1
 --- !u!61 &4621473546395695369
 BoxCollider2D:
   m_ObjectHideFlags: 0

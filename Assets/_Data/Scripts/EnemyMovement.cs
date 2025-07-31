@@ -45,12 +45,12 @@ public class EnemyMovement : MonoBehaviour
 
     void SetupNextParabola()
     {
-        if (currentWaypointIndex >= waypoints.Length) return;
+        if (currentWaypointIndex >= waypoints.Length || waypoints[currentWaypointIndex] == null) return;
 
         startPoint = transform.position;
         endPoint = waypoints[currentWaypointIndex].position;
         journeyLength = Vector3.Distance(startPoint, endPoint);
-        journeyTime = journeyLength / speed;
+        journeyTime = speed != 0 ? journeyLength / speed : 1f;
         startTime = Time.time;
         isMovingParabola = true;
     }
@@ -59,8 +59,15 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!isMovingParabola) return;
 
-        float t = (Time.time - startTime) / journeyTime;
+        if (journeyTime <= 0f)
+        {
+            transform.position = endPoint;
+            currentWaypointIndex++;
+            SetupNextParabola();
+            return;
+        }
 
+        float t = (Time.time - startTime) / journeyTime;
 
         if (t >= 1f)
         {
@@ -72,10 +79,16 @@ public class EnemyMovement : MonoBehaviour
 
         // Tính vị trí theo parabol (trục cong là Y)
         Vector3 flatPos = Vector3.Lerp(startPoint, endPoint, t);
-        float height = 2f; // chiều cao cực đại của parabol
+        float height = 2f;
         float parabola = 4 * height * (t - t * t); // công thức y = 4h(t - t^2)
 
         flatPos.y += parabola;
+
+        // Kiểm tra NaN
+        if (float.IsNaN(flatPos.x) || float.IsNaN(flatPos.y) || float.IsNaN(flatPos.z))
+        {
+            return;
+        }
 
         transform.position = flatPos;
     }

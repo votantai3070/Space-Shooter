@@ -24,8 +24,6 @@ public class SpawnEnemy : MonoBehaviour
 
         for (int i = 0; i < spawnPerWave; i++)
         {
-
-
             GameObject selectedEnemy = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
 
             GameObject enemy = Instantiate(selectedEnemy, selectedPath.GetChild(0).position, Quaternion.identity);
@@ -42,6 +40,7 @@ public class SpawnEnemy : MonoBehaviour
     public void EnemyDied()
     {
         enemyAlive--;
+        Debug.Log("Enemy died. Remaining enemies: " + enemyAlive);
         if (enemyAlive <= 0)
         {
             StartCoroutine(SpawnWaveCoroutine());
