@@ -5,7 +5,6 @@ public class Shooter : MonoBehaviour
     public Transform centralGun;
     public float bulletSpeed = 10f;
     public float fireRate = 0.5f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         InvokeRepeating("Shoot", 0f, fireRate);

@@ -10,6 +10,7 @@ public class SpawnEnemy : MonoBehaviour
     private int enemyAlive = 0;
 
     private int currentWave = 0;
+    private bool isSpawning = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,6 +20,7 @@ public class SpawnEnemy : MonoBehaviour
 
     System.Collections.IEnumerator SpawnWaveCoroutine()
     {
+        isSpawning = true;
         currentWave++;
         Transform selectedPath = spawnPaths[Random.Range(0, spawnPaths.Length)];
 
@@ -31,20 +33,24 @@ public class SpawnEnemy : MonoBehaviour
             enemy.GetComponent<EnemyMovement>().SetPath(selectedPath);
 
             enemy.GetComponent<EnemyMovement>().SetSpawner(this);
+
             enemyAlive++;
+            Debug.Log("Enemy spawned: " + enemy.name + ", total alive: " + enemyAlive);
 
             yield return new WaitForSeconds(spawnDelay);
         }
+        isSpawning = false;
     }
 
     public void EnemyDied()
     {
         enemyAlive--;
-        Debug.Log("Enemy died. Remaining enemies: " + enemyAlive);
-        if (enemyAlive <= 0)
-        {
+        Debug.Log("Enemy died, remaining: " + enemyAlive);
+
+        if (enemyAlive <= 0 && !isSpawning)
+
             StartCoroutine(SpawnWaveCoroutine());
-        }
+
     }
 
 }

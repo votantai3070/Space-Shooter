@@ -9,12 +9,11 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            worldPosition = InputManager.instance.mousePos;
             worldPosition.z = 0;
 
-            Vector3 newPos = Vector3.Lerp(transform.position, worldPosition, speed * Time.deltaTime);
-            transform.position = newPos;
+            Vector3 newPos = Vector3.Lerp(transform.parent.position, worldPosition, speed * Time.deltaTime);
+            transform.parent.position = newPos;
         }
-
     }
 }
