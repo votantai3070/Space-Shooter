@@ -86,6 +86,7 @@
     <Compile Include="Assets\_Data\Scripts\Enemy\EnemyManage.cs" />
     <Compile Include="Assets\Space Shooter Template FREE\Scripts\PlayerShooting.cs" />
     <Compile Include="Assets\Space Shooter Template FREE\Scripts\Enemy.cs" />
+    <Compile Include="Assets\sprite muzzle flashes\AnimatedTexture.cs" />
     <Compile Include="Assets\_Data\Scripts\Enemy\SpawnEnemy.cs" />
   </ItemGroup>
   <ItemGroup>
