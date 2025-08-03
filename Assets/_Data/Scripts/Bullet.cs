@@ -3,7 +3,7 @@
 public class Bullet : MonoBehaviour
 {
     public float lifeTime = 2f;
-    private GameManager bulletPool;
+    private PlayerManager bulletPool;
     private EnemyManage enemyPool;
 
     private void OnEnable()
@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
         CancelInvoke("Deactivate");
     }
 
-    public void SetPool(GameManager pool, EnemyManage poolEnemy)
+    public void SetPool(PlayerManager pool, EnemyManage poolEnemy)
     {
         if (pool != null)
         {

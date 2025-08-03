@@ -1,50 +1,51 @@
-﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
-    public GameObject bulletPrefab;
-    [SerializeField] int initialBulletCount = 5;
+    public static GameManager instance;
+    public ParticleSystem effectPrefab;
+    public GameObject levelUpPrefab;
+    public Transform spawnLvlUpPrefab;
+    private Transform[] spawnPoint;
 
-    [SerializeField] private List<GameObject> bulletPool = new List<GameObject>();
+    [SerializeField] private float levelUpTimer = 4f;
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-
+        instance = this;
     }
+
     private void Start()
     {
-        for (int i = 0; i <= initialBulletCount; i++)
-        {
-            GameObject gameObject = Instantiate(bulletPrefab);
-            gameObject.SetActive(false);
-            bulletPool.Add(gameObject);
-        }
+        StartCoroutine(SpawnLevelUp());
     }
 
-    public GameObject GetBulletFromPool()
+    public void DestroyEffect(Vector3 position)
     {
-        foreach (GameObject bullet in bulletPool)
-        {
-            if (!bullet.activeInHierarchy)
-            {
-                return bullet;
-            }
-        }
+        ParticleSystem effect = Instantiate(effectPrefab, position, Quaternion.identity);
+        effect.Play();
 
-        GameObject newBullet = Instantiate(bulletPrefab);
-        newBullet.SetActive(false);
-        bulletPool.Add(newBullet);
-        return newBullet;
+        Destroy(effect.gameObject, effect.main.duration);
     }
 
-    public void ReturnBulletToPool(GameObject bullet)
+    IEnumerator SpawnLevelUp()
     {
-        bullet.SetActive(false);
+
+        spawnPoint = new Transform[spawnLvlUpPrefab.childCount];
+
+        for (int i = 0; i < spawnLvlUpPrefab.childCount; i++)
+        {
+            spawnPoint[i] = spawnLvlUpPrefab.GetChild(i);
+        }
+
+        while (true)
+        {
+            int randomIndex = Random.Range(0, spawnPoint.Length);
+            Transform spawnPointTransform = spawnPoint[randomIndex];
+            GameObject levelUp = Instantiate(levelUpPrefab, spawnPointTransform.position, Quaternion.identity);
+
+            yield return new WaitForSeconds(levelUpTimer);
+        }
     }
 }

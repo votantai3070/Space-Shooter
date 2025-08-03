@@ -4,6 +4,7 @@ public class EnemyShootPlayer : MonoBehaviour
 {
     private Bullet bullet;
 
+
     private void Awake()
     {
         bullet = FindAnyObjectByType<Bullet>();
@@ -14,6 +15,8 @@ public class EnemyShootPlayer : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Destroy(collision.gameObject);
+            GameManager.instance.DestroyEffect(collision.transform.position);
+
             bullet.Deactivate();
         }
     }

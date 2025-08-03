@@ -14,11 +14,11 @@ public class InputManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        this.GetMousePos();
+        GetMousePos();
     }
 
     protected void GetMousePos()
     {
-        this.mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 }

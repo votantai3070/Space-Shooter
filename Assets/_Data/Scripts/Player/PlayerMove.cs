@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerMove : MonoBehaviour
             worldPosition = InputManager.instance.mousePos;
             worldPosition.z = 0;
 
+            // Move the player towards the mouse position
             Vector3 newPos = Vector3.Lerp(transform.parent.position, worldPosition, speed * Time.deltaTime);
             transform.parent.position = newPos;
         }

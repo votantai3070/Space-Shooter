@@ -5,6 +5,7 @@ public class PlayerShootEnemy : MonoBehaviour
     private SpawnEnemy spawnEnemy;
     private Bullet bullet;
 
+
     private void Awake()
     {
         spawnEnemy = FindAnyObjectByType<SpawnEnemy>();
@@ -20,6 +21,8 @@ public class PlayerShootEnemy : MonoBehaviour
             spawnEnemy.EnemyDied();
 
             Destroy(collision.gameObject);
+            GameManager.instance.DestroyEffect(collision.transform.position);
+
             bullet.Deactivate();
         }
     }

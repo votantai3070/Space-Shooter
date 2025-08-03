@@ -17,7 +17,7 @@ public class Shooter : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bullet = GameManager.Instance.GetBulletFromPool();
+        GameObject bullet = PlayerManager.Instance.GetBulletFromPool();
         bullet.transform.position = centralGun.position;
         bullet.transform.rotation = centralGun.rotation;
 
@@ -26,7 +26,7 @@ public class Shooter : MonoBehaviour
 
 
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bulletScript.SetPool(GameManager.Instance, null);
+        bulletScript.SetPool(PlayerManager.Instance, null);
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.linearVelocity = centralGun.up * bulletSpeed;
