@@ -35,7 +35,6 @@ public class SpawnEnemy : MonoBehaviour
             enemy.GetComponent<EnemyMovement>().SetSpawner(this);
 
             enemyAlive++;
-            Debug.Log("Enemy spawned: " + enemy.name + ", total alive: " + enemyAlive);
 
             yield return new WaitForSeconds(spawnDelay);
         }
@@ -45,7 +44,6 @@ public class SpawnEnemy : MonoBehaviour
     public void EnemyDied()
     {
         enemyAlive--;
-        Debug.Log("Enemy died, remaining: " + enemyAlive);
 
         if (enemyAlive <= 0 && !isSpawning)
 

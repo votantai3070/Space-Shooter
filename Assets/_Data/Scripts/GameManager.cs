@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         {
             int randomIndex = Random.Range(0, spawnPoint.Length);
             Transform spawnPointTransform = spawnPoint[randomIndex];
-            GameObject levelUp = Instantiate(levelUpPrefab, spawnPointTransform.position, Quaternion.identity);
+            Instantiate(levelUpPrefab, spawnPointTransform.position, Quaternion.identity);
 
             yield return new WaitForSeconds(levelUpTimer);
         }
