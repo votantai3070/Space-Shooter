@@ -10,12 +10,14 @@ public class SpawnEnemy : MonoBehaviour
     private int enemyAlive = 0;
 
     private int currentWave = 0;
+    private int maxWaves = 5;
     private bool isSpawning = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         StartCoroutine(SpawnWaveCoroutine());
+
     }
 
     System.Collections.IEnumerator SpawnWaveCoroutine()
@@ -45,10 +47,10 @@ public class SpawnEnemy : MonoBehaviour
     {
         enemyAlive--;
 
-        if (enemyAlive <= 0 && !isSpawning)
-
+        if (enemyAlive <= 0 && !isSpawning && currentWave < maxWaves)
             StartCoroutine(SpawnWaveCoroutine());
-
+        else
+            StopCoroutine(SpawnWaveCoroutine());
     }
 
 }

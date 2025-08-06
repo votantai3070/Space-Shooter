@@ -9,7 +9,7 @@ public class EnemyShoot : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        InvokeRepeating("Shoot", 0f, fireRate);
+        InvokeRepeating("Shoot", Random.Range(0f, 2f), fireRate);
     }
 
     void Shoot()
