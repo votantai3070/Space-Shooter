@@ -47,4 +47,5 @@ public class EnemyManage : MonoBehaviour
     {
         bullet.SetActive(false);
     }
+
 }
