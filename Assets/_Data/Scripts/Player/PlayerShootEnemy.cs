@@ -4,6 +4,7 @@ public class PlayerShootEnemy : MonoBehaviour
 {
     private SpawnEnemy spawnEnemy;
     private Bullet bullet;
+    [SerializeField] private float damagedBoss = 1f;
 
 
     private void Awake()
@@ -16,14 +17,17 @@ public class PlayerShootEnemy : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Debug.Log("Bullet hit enemy: " + collision.name);
-
             spawnEnemy.EnemyDied();
-
             Destroy(collision.gameObject);
             GameManager.instance.DestroyEffect(collision.transform.position);
 
             bullet.Deactivate();
+        }
+
+        if (collision.CompareTag("Boss"))
+        {
+            HealthBar.instance.TakeDamage(damagedBoss);
+            GameManager.instance.DestroyEffect(collision.transform.position);
         }
     }
 

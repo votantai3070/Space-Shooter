@@ -17,7 +17,7 @@ public class Shooter : MonoBehaviour
     private ParticleSystem muzzleFlashRightGun;
 
     [HideInInspector] public int lvlUpGun = 1;
-    [HideInInspector] public int maxLvlUpGun = 4;
+    [HideInInspector] public int maxLvlUpGun = 3;
     public static Shooter instance;
 
     private void Awake()

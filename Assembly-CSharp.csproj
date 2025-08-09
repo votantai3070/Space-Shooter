@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\_Data\Scripts\BackGround\Parallax.cs" />
     <Compile Include="Assets\_Data\Scripts\Bonus\BonusDestroy.cs" />
+    <Compile Include="Assets\_Data\Scripts\Enemy\BossShooting.cs" />
     <Compile Include="Assets\_Data\Scripts\Enemy\BossMovement.cs" />
     <Compile Include="Assets\_Data\Scripts\Enemy\EnemyShootPlayer.cs" />
     <Compile Include="Assets\_Data\Scripts\Player\PlayerShootEnemy.cs" />
@@ -70,7 +71,9 @@
     <Compile Include="Assets\_Data\Scripts\Enemy\EnemyShoot.cs" />
     <Compile Include="Assets\Space Shooter Template FREE\Scripts\PlayerMoving.cs" />
     <Compile Include="Assets\_Data\Scripts\InputManager.cs" />
+    <Compile Include="Assets\_Data\Scripts\UIManager.cs" />
     <Compile Include="Assets\_Data\Scripts\GameManager.cs" />
+    <Compile Include="Assets\_Data\Scripts\HealthBar.cs" />
     <Compile Include="Assets\_Data\Scripts\Bonus\BonusMoving.cs" />
     <Compile Include="Assets\_Data\Scripts\Bullet.cs" />
     <Compile Include="Assets\Space Shooter Template FREE\Scripts\PoolingController.cs" />

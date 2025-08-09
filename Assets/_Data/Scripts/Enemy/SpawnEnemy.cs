@@ -19,8 +19,11 @@ public class SpawnEnemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (currentWave >= maxWaves && enemyAlive <= 0 && !isSpawning)
+        {
+            HealthBar.instance.ShowHealthBar();
+        }
         StartCoroutine(SpawnWaveCoroutine());
-
     }
 
     void Update()
@@ -29,9 +32,8 @@ public class SpawnEnemy : MonoBehaviour
         {
             SpawnBoss();
             enabled = false;
+            HealthBar.instance.ShowHealthBar();
         }
-        Debug.Log("Current Wave: " + currentWave + " | Enemies Alive: " + enemyAlive);
-        Debug.Log("Is Spawning: " + isSpawning);
     }
 
     System.Collections.IEnumerator SpawnWaveCoroutine()
