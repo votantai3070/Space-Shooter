@@ -6,11 +6,15 @@ public class BonusPlayer : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (Shooter.instance.lvlUpGun < Shooter.instance.maxLvlUpGun)
+            if (Shooter.instance.lvlUpGun != Shooter.instance.maxLvlUpGun)
             {
-                Shooter.instance.lvlUpGun++;
+                if (Shooter.instance.lvlUpGun < Shooter.instance.maxLvlUpGun)
+                {
+                    Shooter.instance.lvlUpGun++;
+                }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
+
         }
 
     }

@@ -10,7 +10,7 @@ public class BossShooting : MonoBehaviour
     //public GameObject lazerPrefab;
 
     public float fireSpeed = 5f;
-    private bool isAttack = false;
+    //private bool isAttack = false;
     [SerializeField] private int shootStrangthCount = 10;
     [SerializeField] private float shootStrangthDelay = 0.2f;
     [SerializeField] private float shootSpreadCount = 8;
@@ -94,7 +94,7 @@ public class BossShooting : MonoBehaviour
     {
         GameObject bullet = GetBulletInPool();
         bullet.transform.position = firePoint.position;
-        bullet.transform.rotation = Quaternion.identity;
+        bullet.transform.rotation = firePoint.rotation;
 
         bullet.SetActive(true);
 

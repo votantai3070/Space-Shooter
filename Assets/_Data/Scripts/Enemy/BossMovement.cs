@@ -7,7 +7,6 @@ public class BossMovement : MonoBehaviour
     private Transform startPoint;
     private Transform endPoint;
 
-    [SerializeField] private float speed = 5f;
     private Transform currentTarget;
     private bool hasReachedMovePoint = false;
 
@@ -32,7 +31,7 @@ public class BossMovement : MonoBehaviour
         transform.position = Vector3.MoveTowards(
            transform.position,
            currentTarget.position,
-           speed * Time.deltaTime
+           GameSettings.instance.bossSpeed * Time.deltaTime
        );
 
         if (!hasReachedMovePoint && Vector3.Distance(transform.position, movePoint.position) < 0.01f)

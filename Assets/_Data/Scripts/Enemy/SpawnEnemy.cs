@@ -7,7 +7,6 @@ public class SpawnEnemy : MonoBehaviour
     public Transform[] spawnPaths;
     public GameObject bossPrefab;
     public Transform bossPaths;
-    public int spawnPerWave = 5;
     public float spawnDelay = 0.3f;
     private int enemyAlive = 0;
 
@@ -16,6 +15,8 @@ public class SpawnEnemy : MonoBehaviour
     private bool isSpawning = false;
     private Transform[] bossSpawnPath;
 
+    public SettingsManager settingsManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,11 +24,13 @@ public class SpawnEnemy : MonoBehaviour
         {
             HealthBar.instance.ShowHealthBar();
         }
-        StartCoroutine(SpawnWaveCoroutine());
+        Invoke("StartSpawning", 2f);
     }
 
     void Update()
     {
+        if (Time.timeScale == 0)
+            return;
         if (currentWave >= maxWaves && enemyAlive <= 0 && !isSpawning)
         {
             SpawnBoss();
@@ -36,13 +39,18 @@ public class SpawnEnemy : MonoBehaviour
         }
     }
 
+    private void StartSpawning()
+    {
+        StartCoroutine(SpawnWaveCoroutine());
+    }
+
     System.Collections.IEnumerator SpawnWaveCoroutine()
     {
         isSpawning = true;
         currentWave++;
         Transform selectedPath = spawnPaths[Random.Range(0, spawnPaths.Length)];
 
-        for (int i = 0; i < spawnPerWave; i++)
+        for (int i = 0; i < GameSettings.instance.enemySpawn; i++)
         {
             GameObject selectedEnemy = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
 
@@ -65,7 +73,7 @@ public class SpawnEnemy : MonoBehaviour
     public void EnemyDied()
     {
         enemyAlive--;
-
+        Debug.Log("Enemy died. Enemies alive: " + enemyAlive);
         if (enemyAlive <= 0 && !isSpawning && currentWave < maxWaves)
             StartCoroutine(SpawnWaveCoroutine());
     }

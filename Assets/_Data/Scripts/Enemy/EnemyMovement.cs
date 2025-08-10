@@ -4,7 +4,6 @@ public class EnemyMovement : MonoBehaviour
 {
     private Transform[] waypoints;
     private int currentWaypointIndex = 0;
-    public float speed = 2f;
     private SpawnEnemy spawner;
 
     private Vector3 startPoint;
@@ -15,14 +14,24 @@ public class EnemyMovement : MonoBehaviour
 
     private bool isMovingParabola = false;
 
+
+
+
     public void SetPath(Transform path)
     {
+        if (path == null || path.childCount == 0)
+        {
+            Debug.LogError("Path is null or has no waypoints!");
+            return;
+        }
+
         waypoints = new Transform[path.childCount];
         for (int i = 0; i < path.childCount; i++)
         {
             waypoints[i] = path.GetChild(i);
         }
 
+        currentWaypointIndex = 0; // reset index
         SetupNextParabola();
     }
 
@@ -45,10 +54,20 @@ public class EnemyMovement : MonoBehaviour
 
     void SetupNextParabola()
     {
-        if (currentWaypointIndex >= waypoints.Length || waypoints[currentWaypointIndex] == null) return;
+        if (waypoints == null || currentWaypointIndex >= waypoints.Length || waypoints[currentWaypointIndex] == null)
+        {
+            Debug.LogWarning("No valid waypoint found, stopping movement.");
+            isMovingParabola = false;
+            return;
+        }
 
         startPoint = transform.position;
         endPoint = waypoints[currentWaypointIndex].position;
+
+        float speed = (GameSettings.instance != null)
+            ? GameSettings.instance.enemySpeed
+            : 2f; // default fallback
+
         journeyLength = Vector3.Distance(startPoint, endPoint);
         journeyTime = speed != 0 ? journeyLength / speed : 1f;
         startTime = Time.time;

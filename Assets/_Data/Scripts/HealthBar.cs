@@ -7,6 +7,7 @@ public class HealthBar : MonoBehaviour
     public Slider healthBar;
 
     public float maxHealth = 100f;
+    [SerializeField] private int bossScore = 100;
     private float currentHealth;
     public static HealthBar instance;
 
@@ -47,6 +48,8 @@ public class HealthBar : MonoBehaviour
 
     private void Die()
     {
+        UIManager.instance.CalculateScore(bossScore);
+        healthBarUI.SetActive(false);
         Destroy(gameObject);
     }
 }

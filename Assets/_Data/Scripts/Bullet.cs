@@ -5,6 +5,12 @@ public class Bullet : MonoBehaviour
     public float lifeTime = 2f;
     private PlayerManager bulletPool;
     private EnemyManage enemyPool;
+    public static Bullet instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void OnEnable()
     {

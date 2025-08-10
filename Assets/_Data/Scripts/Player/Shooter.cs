@@ -9,8 +9,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] private GameObject leftGun;
     [SerializeField] private GameObject rightGun;
     //public Transform effect;
-    public float bulletSpeed = 10f;
-    public float fireRate = 0.5f;
+
     //public Transform muzzleFalshPrefab;
     private ParticleSystem muzzleFlashCentralGun;
     private ParticleSystem muzzleFlashLeftGun;
@@ -18,6 +17,9 @@ public class Shooter : MonoBehaviour
 
     [HideInInspector] public int lvlUpGun = 1;
     [HideInInspector] public int maxLvlUpGun = 3;
+
+    public SettingsManager settingsManager;
+
     public static Shooter instance;
 
     private void Awake()
@@ -31,7 +33,7 @@ public class Shooter : MonoBehaviour
         muzzleFlashLeftGun = leftGun.GetComponentInChildren<ParticleSystem>();
         muzzleFlashRightGun = rightGun.GetComponentInChildren<ParticleSystem>();
 
-        InvokeRepeating("Shoot", 0f, fireRate);
+        InvokeRepeating("Shoot", 0f, GameSettings.instance.playerFireRate);
     }
 
     void Shoot()
@@ -72,7 +74,7 @@ public class Shooter : MonoBehaviour
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         bulletScript.SetPool(PlayerManager.Instance, null);
 
-        rb.linearVelocity = gun.transform.up * bulletSpeed;
+        rb.linearVelocity = gun.transform.up * GameSettings.instance.playerBulletSpeed;
     }
 
     //void Effect()

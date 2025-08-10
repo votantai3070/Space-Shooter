@@ -4,8 +4,7 @@ public class PlayerShootEnemy : MonoBehaviour
 {
     private SpawnEnemy spawnEnemy;
     private Bullet bullet;
-    [SerializeField] private float damagedBoss = 1f;
-
+    [SerializeField] private int enemyScore = 10;
 
     private void Awake()
     {
@@ -18,6 +17,7 @@ public class PlayerShootEnemy : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             spawnEnemy.EnemyDied();
+            UIManager.instance.CalculateScore(enemyScore);
             Destroy(collision.gameObject);
             GameManager.instance.DestroyEffect(collision.transform.position);
 
@@ -26,7 +26,7 @@ public class PlayerShootEnemy : MonoBehaviour
 
         if (collision.CompareTag("Boss"))
         {
-            HealthBar.instance.TakeDamage(damagedBoss);
+            HealthBar.instance.TakeDamage(GameSettings.instance.damageToBoss);
             GameManager.instance.DestroyEffect(collision.transform.position);
         }
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class GameManager : MonoBehaviour
     public ParticleSystem effectPrefab;
     public GameObject levelUpPrefab;
     public Transform spawnLvlUpPrefab;
+    public GameObject player;
+    public GameObject[] enemies;
+
     private Transform[] spawnPoint;
 
     [SerializeField] private float levelUpTimer = 4f;
@@ -14,10 +18,21 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        Time.timeScale = 0;
     }
 
     private void Start()
     {
+        Debug.Log(Application.persistentDataPath);
+        player.SetActive(false);
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.SetActive(false);
+        }
+        UIManager.instance.playerLifeText.gameObject.SetActive(false);
+        UIManager.instance.scoreText.gameObject.SetActive(false);
+        UIManager.instance.settingUI.SetActive(false);
+
         StartCoroutine(SpawnLevelUp());
     }
 
@@ -47,5 +62,33 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForSeconds(levelUpTimer);
         }
+    }
+
+    public void PlayGame()
+    {
+        UIManager.instance.mainMenu.SetActive(false);
+        UIManager.instance.gameOver.SetActive(false);
+        player.SetActive(true);
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.SetActive(true);
+        }
+        UIManager.instance.playerLifeText.gameObject.SetActive(true);
+        UIManager.instance.scoreText.gameObject.SetActive(true);
+
+        Time.timeScale = 1;
+    }
+
+    public void GoToMenu()
+    {
+        UIManager.instance.gameOver.SetActive(false);
+        UIManager.instance.mainMenu.SetActive(true);
+    }
+
+    public void GameOver()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        GameSettings.instance.ResetLives();
+        SceneManager.LoadScene(scene.name);
     }
 }
