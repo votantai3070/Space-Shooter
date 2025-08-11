@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
         UIManager.instance.scoreText.gameObject.SetActive(false);
 
         UIManager.instance.gameOver.SetActive(false);
+        UIManager.instance.gameWin.SetActive(false);
         UIManager.instance.mainMenu.SetActive(true);
 
         player.SetActive(false);
@@ -96,6 +97,8 @@ public class GameManager : MonoBehaviour
         {
             enemy.SetActive(false);
         }
+        SceneManager.LoadScene("GameScene");
+
     }
 
     public void PlayAgain()
@@ -113,8 +116,7 @@ public class GameManager : MonoBehaviour
         }
         // Reset the scene
 
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
+        SceneManager.LoadScene("GameScene");
 
         Time.timeScale = 1;
     }
