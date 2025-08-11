@@ -1988,7 +1988,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 5
+          m_FloatArgument: 3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -2036,7 +2036,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0ff1f8012ca4c4a827f9c20f900fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingsManager: {fileID: 1360690897}
 --- !u!1 &585237986
 GameObject:
   m_ObjectHideFlags: 0
@@ -7720,13 +7719,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b14e34f2824fb1e4ba47d950c648234f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLives: 3
+  playerLives: 10
   playerSpeed: 5
   playerFireRate: 0.5
   playerBulletSpeed: 10
   enemySpawn: 5
-  enemySpeed: 2
-  enemyBulletSpeed: 5
+  enemySpeed: 1
+  enemyBulletSpeed: 3
   enemyFireRate: 1
   damageToBoss: 2
   bossSpeed: 1
@@ -17205,7 +17204,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.5
+          m_FloatArgument: 0.3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -24405,7 +24404,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 10
+          m_FloatArgument: 5
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2

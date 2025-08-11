@@ -128,4 +128,6 @@ public class BossShooting : MonoBehaviour
             bullet.SetActive(false);
         }
     }
+
+
 }

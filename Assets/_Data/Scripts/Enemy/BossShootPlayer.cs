@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyShootPlayer : MonoBehaviour
+public class BossShootPlayer : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -20,7 +20,7 @@ public class EnemyShootPlayer : MonoBehaviour
                     Time.timeScale = 0;
                     UIManager.instance.gameOver.SetActive(true);
                 }
-                Bullet.instance.Deactivate();
+
             }
         }
     }

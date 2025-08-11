@@ -73,6 +73,7 @@
     <Compile Include="Assets\_Data\Scripts\Enemy\EnemyShoot.cs" />
     <Compile Include="Assets\_Data\Scripts\InputManager.cs" />
     <Compile Include="Assets\_Data\Scripts\UIManager.cs" />
+    <Compile Include="Assets\_Data\Scripts\Enemy\BossShootPlayer.cs" />
     <Compile Include="Assets\_Data\Scripts\GameManager.cs" />
     <Compile Include="Assets\_Data\Scripts\HealthBar.cs" />
     <Compile Include="Assets\_Data\Scripts\Bonus\BonusMoving.cs" />

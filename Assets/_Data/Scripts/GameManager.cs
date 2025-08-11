@@ -77,12 +77,16 @@ public class GameManager : MonoBehaviour
         UIManager.instance.scoreText.gameObject.SetActive(true);
 
         Time.timeScale = 1;
+
+
     }
 
     public void GoToMenu()
     {
         UIManager.instance.gameOver.SetActive(false);
         UIManager.instance.mainMenu.SetActive(true);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
     public void GameOver()
