@@ -18,7 +18,6 @@ public class Shooter : MonoBehaviour
     [HideInInspector] public int lvlUpGun = 1;
     [HideInInspector] public int maxLvlUpGun = 3;
 
-    public SettingsManager settingsManager;
 
     public static Shooter instance;
 

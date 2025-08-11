@@ -15,7 +15,6 @@ public class SpawnEnemy : MonoBehaviour
     private bool isSpawning = false;
     private Transform[] bossSpawnPath;
 
-    public SettingsManager settingsManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

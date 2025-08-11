@@ -29,7 +29,7 @@ public class GameSettings : MonoBehaviour
     public float damageToBoss = 2f;
     public float bossSpeed = 1f;
     public static GameSettings instance;
-    public int defaultPlayerLives = 3;
+    [SerializeField] private int defaultPlayerLives = 3;
 
     //public GameSettingsData gameSettingsData = new GameSettingsData();
     private void Awake()
@@ -47,8 +47,10 @@ public class GameSettings : MonoBehaviour
 
     }
 
+
+
     public void ResetLives()
     {
-        playerLives = defaultPlayerLives;
+        defaultPlayerLives = playerLives;
     }
 }

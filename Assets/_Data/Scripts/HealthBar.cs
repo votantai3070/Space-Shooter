@@ -51,5 +51,8 @@ public class HealthBar : MonoBehaviour
         UIManager.instance.CalculateScore(bossScore);
         healthBarUI.SetActive(false);
         Destroy(gameObject);
+        GameManager.instance.isGameWin = true;
+        UIManager.instance.gameWin.SetActive(true);
+        Time.timeScale = 0;
     }
 }

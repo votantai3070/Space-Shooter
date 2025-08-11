@@ -5,7 +5,6 @@ public class PlayerMove : MonoBehaviour
 {
     protected Vector3 worldPosition;
 
-    public SettingsManager settingsManager;
 
     void FixedUpdate()
     {

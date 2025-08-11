@@ -28,6 +28,7 @@ public class PlayerShootEnemy : MonoBehaviour
         {
             HealthBar.instance.TakeDamage(GameSettings.instance.damageToBoss);
             GameManager.instance.DestroyEffect(collision.transform.position);
+
         }
     }
 

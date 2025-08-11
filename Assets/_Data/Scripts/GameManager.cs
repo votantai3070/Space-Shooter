@@ -12,18 +12,18 @@ public class GameManager : MonoBehaviour
     public GameObject[] enemies;
 
     private Transform[] spawnPoint;
+    [HideInInspector] public bool isGameWin = false;
 
     [SerializeField] private float levelUpTimer = 4f;
 
     private void Awake()
     {
         instance = this;
-        Time.timeScale = 0;
     }
 
     private void Start()
     {
-        Debug.Log(Application.persistentDataPath);
+        Time.timeScale = 0;
         player.SetActive(false);
         foreach (GameObject enemy in enemies)
         {
@@ -31,7 +31,9 @@ public class GameManager : MonoBehaviour
         }
         UIManager.instance.playerLifeText.gameObject.SetActive(false);
         UIManager.instance.scoreText.gameObject.SetActive(false);
-        UIManager.instance.settingUI.SetActive(false);
+        UIManager.instance.gameOver.SetActive(false);
+        UIManager.instance.mainMenu.SetActive(true);
+        UIManager.instance.gameWin.SetActive(false);
 
         StartCoroutine(SpawnLevelUp());
     }
@@ -77,22 +79,55 @@ public class GameManager : MonoBehaviour
         UIManager.instance.scoreText.gameObject.SetActive(true);
 
         Time.timeScale = 1;
-
-
     }
 
     public void GoToMenu()
     {
+        Time.timeScale = 0;
+
+        UIManager.instance.playerLifeText.gameObject.SetActive(false);
+        UIManager.instance.scoreText.gameObject.SetActive(false);
+
         UIManager.instance.gameOver.SetActive(false);
         UIManager.instance.mainMenu.SetActive(true);
+
+        player.SetActive(false);
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.SetActive(false);
+        }
+    }
+
+    public void PlayAgain()
+    {
+        GameSettings.instance.ResetLives();
+        isGameWin = false;
+        UIManager.instance.playerLifeText.gameObject.SetActive(true);
+        UIManager.instance.scoreText.gameObject.SetActive(true);
+        UIManager.instance.gameOver.SetActive(false);
+        UIManager.instance.gameWin.SetActive(false);
+        player.SetActive(true);
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.SetActive(true);
+        }
+        // Reset the scene
+
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+
+        Time.timeScale = 1;
     }
 
     public void GameOver()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        GameSettings.instance.ResetLives();
-        SceneManager.LoadScene(scene.name);
+        Time.timeScale = 0;
+        UIManager.instance.gameOver.SetActive(true);
+    }
+
+    public void GameWin()
+    {
+        Time.timeScale = 0;
+        UIManager.instance.gameWin.SetActive(true);
     }
 }

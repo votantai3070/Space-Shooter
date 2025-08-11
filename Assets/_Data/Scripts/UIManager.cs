@@ -9,8 +9,8 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI playerLifeText;
     public TextMeshProUGUI scoreText;
     public GameObject gameOver;
+    public GameObject gameWin;
     public GameObject mainMenu;
-    public GameObject settingUI;
 
     private int currentScore;
     public static UIManager instance;
@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         gameOver.SetActive(false);
+        gameWin.SetActive(false);
         scoreText.text = 0.ToString();
         if (bossHealthBarUI != null)
         {
@@ -41,19 +42,5 @@ public class UIManager : MonoBehaviour
         scoreText.text = currentScore.ToString();
     }
 
-    public void OpenSetting()
-    {
-        settingUI.SetActive(true);
-        mainMenu.SetActive(false);
-        gameOver.SetActive(false);
-        Time.timeScale = 0;
-    }
 
-    public void CloseSetting()
-    {
-        settingUI.SetActive(false);
-        mainMenu.SetActive(true);
-        gameOver.SetActive(false);
-        Time.timeScale = 0;
-    }
 }
